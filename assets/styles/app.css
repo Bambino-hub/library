@@ -1,3 +1,82 @@
-body {
-    background-color: skyblue;
+
+/********************Les polices utilisées********************/
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Redressed&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Redressed&display=swap");
+
+.merri {
+    font-family: "Merriweather", serif;
+}
+
+.redress {
+    font-family: "Redressed", cursive;
+}
+
+/******************** NAVBAR***************************/
+
+.image-navbar img {
+    width: 25%;
+    height: 25%;
+    border-radius: 100%;
+}
+
+@media screen and (max-width: 360px) {
+    .image-navbar img {
+        width: 60%;
+        height: 60%;
+        border-radius: 100%;
+    }
+}
+
+.bc-navbar {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    width: 100%;
+    z-index: 99;
+}
+
+.name {
+    padding-top: 60px;
+}
+
+
+******************* CSS FOR REGISTER ****************/ .p1-register {
+    padding-top: 60px;
+}
+
+@media screen and (min-width: 360px) {
+    .p1-register {
+        padding-top: 105px;
+    }
+
+    .nav-items {
+        padding-top: 15px;
+    }
+}
+
+@media screen and (min-width: 836px) {
+    form {
+        max-width: 696px;
+    }
+}
+
+@media screen and (min-width: 908px) {
+    .p1-register {
+        max-width: 936px;
+    }
+}
+
+
+/************************* CSS FOR LOGIN **********************/
+.h1-login {
+    padding-top: 130px;
+}
+
+.login-form {
+    margin-bottom: 150px;
+}
+
+@media screen and (min-width: 768px) {
+    .question {
+        display: flex;
+    }
 }
