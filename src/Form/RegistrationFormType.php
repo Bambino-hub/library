@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -57,6 +59,7 @@ class RegistrationFormType extends AbstractType
             ->add("save", SubmitType::class,[
                 'label' => 'Register',
             ])
+            ->addEventListener(FormEvents::POST_SUBMIT, [$this, 'attachTimesTamp'])
         ;
     }
 
@@ -66,4 +69,22 @@ class RegistrationFormType extends AbstractType
             'data_class' => User::class,
         ]);
     }
+
+    /**
+     * add event listener to createadAt field
+     * @param \Symfony\Component\Form\Event\PostSubmitEvent $event
+     * @return void
+     */
+    public function attachTimesTamp(PostSubmitEvent $event): void
+    {
+        $data = $event->getData();
+        if (!($data instanceof User) ){
+            return;
+        }
+
+        if(!($data->getId())){
+            $data->setCreatedAt(new \DateTimeImmutable());
+        }
+    }
+    
 }
