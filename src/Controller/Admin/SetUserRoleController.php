@@ -1,27 +1,15 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\User;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-final class UserController extends AbstractController
+class SetUserRoleController extends AbstractController
 {
-
-    /**
-     * this function return all users
-     */
-    #[Route('/user', name: 'app_all_user')]
-    public function index(UserRepository $userRepository): Response
-    {
-        return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll()
-        ]);
-    }
 
     /**
      * this function set role admin for user
@@ -29,7 +17,6 @@ final class UserController extends AbstractController
     #[Route('/user/{id}/promote', name: 'app_promote_user')]
     public function promoteToAdmin(User $user, EntityManagerInterface $em): Response
     {
-    
         if (!$user) {
             $this->addFlash('danger', 'User not found');
         }
@@ -44,10 +31,12 @@ final class UserController extends AbstractController
     #[Route('/user/{id}/demote', name: 'app_demote_user')]
     public function demoteFromAdmin(User $user, EntityManagerInterface $em): Response
     {
-        if (!$user) {
-            $this->addFlash('danger', 'User not found');
+        if (!$user instanceof User) {
+            //$this->addFlash('danger', 'User not found');
+            throw $this->createAccessDeniedException('User not found');
         }
         $roles = $user->getRoles();
+
         if (($key = array_search('ROLE_ADMIN', $roles)) !== false) {
             unset($roles[$key]);
         }
@@ -55,4 +44,5 @@ final class UserController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('app_all_user');
     }
+
 }

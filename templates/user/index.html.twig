@@ -24,11 +24,20 @@
             <td>{{ user.firstname }}</td>
             <td>{{ user.lastname }}</td>
             <td>{{ user.email }}</td>
-            <td><a href="#" class="btn btn-danger">Supprimer</a>
+            <td>
+                <div class="d-flex gap-3">
+                    <form
+                 action="{{ path('app_delete_user',{id: user.id}) }}"
+                 method="post"
+                 onsubmit="return confirm('Are you sure you want to delete this item?');">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </form>
                 {% if 'ROLE_ADMIN' in user.roles  %}
             <a href="{{ path('app_demote_user',{id: user.id}) }}" class="btn btn-warning">Remove Admin</a>
                 {% else %}
             <a href="{{ path('app_promote_user',{id: user.id}) }}" class="btn btn-success">Make Admin</a>
+                </div>
                 {% endif %}
             </td>
         </tr>
