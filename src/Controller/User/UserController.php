@@ -11,14 +11,18 @@ use Symfony\Component\Routing\Attribute\Route;
 class UserController extends AbstractController
 {
 
+    public function __construct(
+        private readonly UserRepository $userRepository
+    ){}
+
     /**
      * this function return all users
      */
     #[Route('/user', name: 'app_all_user')]
-    public function index(UserRepository $userRepository): Response
+    public function index(): Response
     {
         return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll()
+            'users' => $this->userRepository->findAll()
         ]);
     }
     

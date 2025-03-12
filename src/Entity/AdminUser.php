@@ -2,25 +2,22 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
+use App\Repository\AdminUserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: '`user`')]
-// #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_FIRSTNAME', fields: ['firstname'])]
-// #[UniqueEntity(fields: ['firstname'], message: 'There is already an account with this firstname')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+#[ORM\Entity(repositoryClass: AdminUserRepository::class)]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180, unique: true)]
-    private ?string $firstname = null;
+    #[ORM\Column(length: 180)]
+    private ?string $email = null;
 
     /**
      * @var list<string> The user roles
@@ -35,13 +32,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $lastname = null;
+    private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $email = null;
-
-    #[ORM\Column]
-    private bool $isVerified = false;
+    private ?string $lastname = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
@@ -51,14 +45,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    public function getFirstname(): ?string
+    public function getEmail(): ?string
     {
-        return $this->firstname;
+        return $this->email;
     }
 
-    public function setFirstname(string $firstname): static
+    public function setEmail(string $email): static
     {
-        $this->firstname = $firstname;
+        $this->email = $email;
 
         return $this;
     }
@@ -70,7 +64,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->firstname;
+        return (string) $this->email;
     }
 
     /**
@@ -121,6 +115,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): static
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
     public function getLastname(): ?string
     {
         return $this->lastname;
@@ -129,30 +135,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastname(string $lastname): static
     {
         $this->lastname = $lastname;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): static
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function isVerified(): bool
-    {
-        return $this->isVerified;
-    }
-
-    public function setIsVerified(bool $isVerified): static
-    {
-        $this->isVerified = $isVerified;
 
         return $this;
     }
