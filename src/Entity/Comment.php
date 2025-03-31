@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use App\Enum\CommentStatus;
 use App\Repository\CommentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +31,20 @@ class Comment
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
+
+    /**
+     * @var Collection<int, Book>
+     */
+    #[ORM\ManyToMany(targetEntity: Book::class, mappedBy: 'comment')]
+    private Collection $books;
+
+    #[ORM\Column(enumType: CommentStatus::class)]
+    private ?CommentStatus $status = null;
+
+    public function __construct()
+    {
+        $this->books = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +107,45 @@ class Comment
     public function setContent(string $content): static
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Book>
+     */
+    public function getBooks(): Collection
+    {
+        return $this->books;
+    }
+
+    public function addBook(Book $book): static
+    {
+        if (!$this->books->contains($book)) {
+            $this->books->add($book);
+            $book->addComment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBook(Book $book): static
+    {
+        if ($this->books->removeElement($book)) {
+            $book->removeComment($this);
+        }
+
+        return $this;
+    }
+
+    public function getStatus(): ?CommentStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(CommentStatus $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }
