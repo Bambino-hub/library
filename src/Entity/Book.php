@@ -58,7 +58,7 @@
 
         
 
-        // setters et getters
+        // setters and getters
 
         public function getId(): ?int
         {
