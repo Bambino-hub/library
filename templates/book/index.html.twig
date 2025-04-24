@@ -1,47 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Book index{% endblock %}
+{% block title %}Book index
+{% endblock %}
 
 {% block body %}
-    <h1>Book index</h1>
+	<h1>Book index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Isbn</th>
-                <th>Cover</th>
-                <th>EditedAt</th>
-                <th>Plot</th>
-                <th>PageNumber</th>
-                <th>Status</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for book in books %}
-            <tr>
-                <td>{{ book.id }}</td>
-                <td>{{ book.title }}</td>
-                <td>{{ book.isbn }}</td>
-                <td>{{ book.cover }}</td>
-                <td>{{ book.editedAt ? book.editedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ book.plot }}</td>
-                <td>{{ book.pageNumber }}</td>
-                <td>{{ book.status }}</td>
-                <td>
-                    <a href="{{ path('app_book_show', {'id': book.id}) }}">show</a>
-                    <a href="{{ path('app_book_edit', {'id': book.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Title</th>
+				<th>Isbn</th>
+				<th>Cover</th>
+				<th>EditedAt</th>
+				<th>Plot</th>
+				<th>PageNumber</th>
+				<th>Status</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for book in books %}
+				<tr>
+					<td>{{ book.id }}</td>
+					<td>{{ book.title }}</td>
+					<td>{{ book.isbn }}</td>
+					<td>{{ book.cover }}</td>
+					<td>{{ book.editedAt ? book.editedAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ book.plot }}</td>
+					<td>{{ book.pageNumber }}</td>
+					<td>
+						{% for statu in book.status %}
+							{{ statu.value }}
+						{% endfor %}
+					</td>
+					<td>
+						<a href="{{ path('app_book_show', {'id': book.id}) }}">show</a>
+						<a href="{{ path('app_book_edit', {'id': book.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="9">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
-    <a href="{{ path('app_book_new') }}">Create new</a>
+	<a href="{{ path('app_book_new') }}">Create new</a>
 {% endblock %}

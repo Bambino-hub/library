@@ -4,57 +4,49 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
-		<h1 class="name t-center">Bienvenue sur BAMBINO_LIBRARY</h1>
-		<H2>Voici tous les livres disponible aupres de notre bibliotheque !!</H2>
-		<div class="books-list d-flex flex-wrap  justify-content-center">
-			{% if app.user %}
-				<p>Bonjour
-					{{ app.user.username }}
-				{% endif %}
-				{% if books is not empty %}
-					{% for book in books %}
+<div class="container">
+	<h1 class="name t-center">Bienvenue sur BAMBINO_LIBRARY</h1>
+	<H2>Voici tous les livres disponible aupres de notre bibliotheque !!</H2>
+	<div class="books-list d-flex flex-wrap  justify-content-center">
+		{% if books is not empty %}
+			{% for book in books %}
 
-						<div
-							class="card" style="width: 18rem;">
-							{# <img src="#" class="card-img-top" alt="{{ book.cover }}"> #}
-							<a href="{{ book.cover }}" class=" btn btn-grey">Cover</a>
+				<div
+					class="card" style="width: 18rem;">
+					{# <img src="#" class="card-img-top" alt="{{ book.cover }}"> #}
+					<a href="{{ book.cover }}" class=" btn btn-grey">Cover</a>
 
-							<div class="card-body">
-								<h5 class="card-title">Titre:
-									{{ book.title }}</p>
-							</h5>
-							<p class="card-text">Auteur:
-								{{ book.author.name }}</p>
-							<p class="card-text">Publication:
-								{{ book.editedAt ? book.editedAt| date('d/m/y H:i')}}</p>
-							<p class="card-text">Résumé:
-								{{ book.plot }}</p>
+					<div class="card-body">
+						<h5 class="card-title">Titre:
+							{{ book.title }}</p>
+					</h5>
+					<p class="card-text">Auteur:
+						{{ book.author.name }}</p>
+					<p class="card-text">Publication:
+						{{ book.editedAt ? book.editedAt| date('d/m/y H:i')}}</p>
+					<p class="card-text">Résumé:
+						{{ book.plot }}</p>
 
-						</div>
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item">
-								{% for statu in book.status %}
-									<p class="btn btn-secondary">
-										{{statu.value}}
-									</p>
-								{% endfor %}
-
-							</li>
-							<li class="list-group-item">
-								Nombre de pages:
-								{{ book.pageNumber }}
-							</li>
-						</p>
-					</li>
-				</ul>
-				<div class="card-body">
-					<a href="#" class="card-link btn btn-primary">
-						En savoir plus</a>
 				</div>
-			</p>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">
+						{% for statu in book.status %}
+							<p class="btn btn-secondary">
+								{{statu.value}}
+							</p>
+						{% endfor %}
+
+					</li>
+					<li class="list-group-item">
+						Nombre de pages:
+						{{ book.pageNumber }}
+					</li>
+				</p>
+			</li>
+		</ul>
+		<div class="card-body">
+			<a href="#" class="card-link btn btn-primary">
+				En savoir plus</a>
 		</div>
-	{% endfor %}
-{% else %}
-	<p>Aucun livre n'est disponible pour le moment.</p>
-{% endif %}</div>{% endblock %}
+	</p>
+</div>{% endfor %}{% else %}<p>Aucun livre n'est disponible pour le moment.</p>{% endif %}</div>{% endblock %}

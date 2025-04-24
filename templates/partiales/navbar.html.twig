@@ -1,64 +1,55 @@
 <header>
-  <nav class="bc-navbar">
-    <div class="container-fluid d-flex">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item image-navbar">
-          <a class="nav-link" href="{{ path('app_home') }}"
-            >Home</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav nav-items">
-        <div class="d-flex pt-2">
-          {% if app.user == false %}
-          <li class="nav-item me-3">
-            <a class="nav-link" href="{{ path('app_register') }}"
-              >Inscription</a
-            >
-          </li>
-          <li class="nav-item me-3">
-            <a class="nav-link" href="{{ path('app_login') }}">connxion</a>
-          </li>
-          {% else %}
-          
-          {% if is_granted('ROLE_ADMIN') %}
+	<nav class="bc-navbar">
+		<div class="container-fluid d-flex">
+			<ul class="navbar-nav me-auto">
+				<li class="nav-item image-navbar">
+					<a class="nav-link" href="{{ path('app_home') }}">Home</a>
+				</li>
+			</ul>
+			<ul class="navbar-nav nav-items">
+				<div class="d-flex pt-2">
+					{% if app.user == false %}
+						<li class="nav-item me-3">
+							<a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+						</li>
+						<li class="nav-item me-3">
+							<a class="nav-link" href="{{ path('app_login') }}">connxion</a>
+						</li>
+					{% else %}
 
-          <li class="nav-item dropdown me-3">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Administration
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a class="dropdown-item" href="{{ path('app_all_user') }}"
-                  >Gestion des utilisateurs</a
-                >
-              </li>
-            </ul>
-          </li>
-          {% endif %} 
-          {# {% if is_granted('ROLE_ADMIN') %}
-          <li class="nav-item me-5 d-none">
-            <a class="nav-link" href="{{ path('app_work_space') }}"
-              >Choix des matières</a
-            >
-          </li>
-          {% else %}
-          <li class="nav-item me-5">
-            <a class="nav-link" href="{{ path('app_work_space') }}">Matières</a>
-          </li>
-          {% endif %} #}
-          <li class="nav-item me-2">
-            <a class="nav-link" href="{{ path('app_logout') }}">Deconnxion</a>
-          </li>
+						{% if is_granted('ROLE_ADMIN') %}
 
-          {% endif %}
-        </div>
-      </ul>
-    </div>
-  </nav>
+							<li class="nav-item dropdown me-3">
+								<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Administration
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a class="dropdown-item" href="{{ path('app_all_user') }}">Gestion des utilisateurs</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="{{ path('app_book_index') }}">Gestion des livres</a>
+
+									</li>
+									<li>
+										<a class="dropdown-item" href="{{ path('app_author_index') }}">Gestion des auteurs</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="{{ path('app_editor_index') }}">Gestion des editeurs</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="{{ path('app_comment_index') }}">Gestion des commentaires</a>
+									</li>
+								</ul>
+							</li>
+						{% endif %}
+						<li class="nav-item me-2">
+							<a class="nav-link" href="{{ path('app_logout') }}">Deconnxion</a>
+						</li>
+
+					{% endif %}
+				</div>
+			</ul>
+		</div>
+	</nav>
 </header>
