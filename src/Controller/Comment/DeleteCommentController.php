@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
-#[Route('/comment')]
+// #[Route('/comment')]
 class DeleteCommentController extends AbstractController
 {
 
@@ -19,7 +19,7 @@ class DeleteCommentController extends AbstractController
         private readonly RequestStack $requestStack
     ) {}
 
-    #[Route('/{id}', name: 'app_comment_delete', methods: ['POST'])]
+    #[Route('/comment/{id}', name: 'app_comment_delete', methods: ['POST'])]
     public function delete(Comment $comment): Response
     {
         if ($this->isCsrfTokenValid('delete' . $comment->getId(), $this->requestStack->getCurrentRequest()->getPayload()->getString('_token'))) {

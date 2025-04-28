@@ -30,12 +30,21 @@
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item">
-						{% for statu in book.status %}
-							<p class="btn btn-secondary">
-								{{statu.value}}
-							</p>
-						{% endfor %}
+						<div class="row">
+							<div class="col">
+								{% for statu in book.status %}
+									<p class="btn btn-secondary">
+										{{statu.value}}
+									</p>
+								{% endfor %}
+							</div>
 
+							<div class="col ">
+								<p>
+									<a class="btn btn-warning" href="{{path('app_comment_new') }}">Commentaire</a>
+								</p>
+							</div>
+						</div>
 					</li>
 					<li class="list-group-item">
 						Nombre de pages:

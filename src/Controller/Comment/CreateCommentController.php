@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/comment')]
+// #[Route('/comment')]
 class CreateCommentController extends AbstractController
 {
 
@@ -20,7 +20,7 @@ class CreateCommentController extends AbstractController
     ) {}
 
 
-    #[Route('/new', name: 'app_comment_new', methods: ['GET', 'POST'])]
+    #[Route('/comment/new', name: 'app_comment_new', methods: ['GET', 'POST'])]
     public function new(): Response
     {
         $comment = new Comment();

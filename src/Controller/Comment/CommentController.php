@@ -11,10 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/comment')]
+// #[Route('/comment')]
 final class CommentController extends AbstractController
 {
-    #[Route(name: 'app_comment_index', methods: ['GET'])]
+    #[Route('/comment', name: 'app_comment_index', methods: ['GET'])]
     public function index(CommentRepository $commentRepository): Response
     {
         return $this->render('comment/index.html.twig', [
@@ -23,15 +23,15 @@ final class CommentController extends AbstractController
     }
 
 
-    #[Route('/{id}', name: 'app_comment_show', methods: ['GET'])]
-    public function show(Comment $comment): Response
-    {
-        return $this->render('comment/show.html.twig', [
-            'comment' => $comment,
-        ]);
-    }
+    // #[Route('/comment/{id}', name: 'app_comment_show', methods: ['GET'])]
+    // public function show(Comment $comment): Response
+    // {
+    //     return $this->render('comment/show.html.twig', [
+    //         'comment' => $comment,
+    //     ]);
+    // }
 
-    #[Route('/{id}/edit', name: 'app_comment_edit', methods: ['GET', 'POST'])]
+    #[Route('/comment/{id}/edit', name: 'app_comment_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(CommentType::class, $comment);

@@ -8,6 +8,7 @@ use App\Entity\Comment;
 use App\Entity\Editor;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,16 +28,14 @@ class BookType extends AbstractType
             ->add('status')
             ->add('author', EntityType::class, [
                 'class' => Author::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
             ])
             ->add('editor', EntityType::class, [
                 'class' => Editor::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
             ])
-            ->add('comment', EntityType::class, [
-                'class' => Comment::class,
-                'choice_label' => 'id',
-                'multiple' => true,
+            ->add('save', SubmitType::class, [
+                'label' => 'Creer',
             ])
         ;
     }

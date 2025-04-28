@@ -4,47 +4,49 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Comment index</h1>
+	<div class="container">
+		<h1>Comment index</h1>
 
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Name</th>
-				<th>Email</th>
-				<th>CreatedAt</th>
-				<th>PublisheAt</th>
-				<th>Content</th>
-				<th>Status</th>
-				<th>actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for comment in comments %}
+		<table class="table">
+			<thead>
 				<tr>
-					<td>{{ comment.id }}</td>
-					<td>{{ comment.name }}</td>
-					<td>{{ comment.email }}</td>
-					<td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ comment.publisheAt ? comment.publisheAt|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ comment.content }}</td>
-					<td>
-						{% for statu in comment.status %}
-							{{ statu.value }}
-						{% endfor %}
-					</td>
-					<td>
-						<a href="{{ path('app_comment_show', {'id': comment.id}) }}">show</a>
-						<a href="{{ path('app_comment_edit', {'id': comment.id}) }}">edit</a>
-					</td>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Email</th>
+					<th>CreatedAt</th>
+					<th>PublisheAt</th>
+					<th>Content</th>
+					<th>Status</th>
+					<th>actions</th>
 				</tr>
-			{% else %}
-				<tr>
-					<td colspan="8">no records found</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				{% for comment in comments %}
+					<tr>
+						<td>{{ comment.id }}</td>
+						<td>{{ comment.name }}</td>
+						<td>{{ comment.email }}</td>
+						<td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+						<td>{{ comment.publisheAt ? comment.publisheAt|date('Y-m-d H:i:s') : '' }}</td>
+						<td>{{ comment.content }}</td>
+						<td>
+							{% for statu in comment.status %}
+								{{ statu.value }}
+							{% endfor %}
+						</td>
+						<td>
+							{# <a href="{{ path('app_comment_show', {'id': comment.id}) }}">show</a> #}
+							<a href="{{ path('app_comment_edit', {'id': comment.id}) }}">edit</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="8">no records found</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 
-	<a href="{{ path('app_comment_new') }}">Create new</a>
+		<a href="{{ path('app_comment_new') }}">Create new</a>
+	</div>
 {% endblock %}
