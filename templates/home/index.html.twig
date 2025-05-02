@@ -41,7 +41,7 @@
 
 							<div class="col ">
 								<p>
-									<a class="btn btn-warning" href="{{path('app_comment_new') }}">Commentaire</a>
+									<a class="btn btn-warning" href="{{path('app_comment_new', {id: book.id}) }}">Commentaire</a>
 								</p>
 							</div>
 						</div>
@@ -54,7 +54,7 @@
 			</li>
 		</ul>
 		<div class="card-body">
-			<a href="#" class="card-link btn btn-primary">
+			<a href="{{path('app_book_show',{id: book.id})}}" class="card-link btn btn-primary">
 				En savoir plus</a>
 		</div>
 	</p>

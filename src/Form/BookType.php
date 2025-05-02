@@ -2,15 +2,17 @@
 
 namespace App\Form;
 
-use App\Entity\Author;
 use App\Entity\Book;
-use App\Entity\Comment;
+use App\Entity\Author;
 use App\Entity\Editor;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Comment;
+use App\Enum\BookStatus;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class BookType extends AbstractType
 {
@@ -25,7 +27,7 @@ class BookType extends AbstractType
             ])
             ->add('plot')
             ->add('pageNumber')
-            ->add('status')
+            ->add('status', EnumType::class, ['class' => BookStatus::class])
             ->add('author', EntityType::class, [
                 'class' => Author::class,
                 'choice_label' => 'name',

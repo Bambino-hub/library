@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Comment index
+{% block title %}
+	liste des livre
 {% endblock %}
 
 {% block body %}
 	<div class="container">
-		<h1>Comment index</h1>
-
+		<h1 class="name">Liste des livres
+		</h1>
 		<table class="table">
 			<thead>
 				<tr>
@@ -29,11 +30,7 @@
 						<td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
 						<td>{{ comment.publisheAt ? comment.publisheAt|date('Y-m-d H:i:s') : '' }}</td>
 						<td>{{ comment.content }}</td>
-						<td>
-							{% for statu in comment.status %}
-								{{ statu.value }}
-							{% endfor %}
-						</td>
+						<td>{{comment.status.value}}</td>
 						<td>
 							{# <a href="{{ path('app_comment_show', {'id': comment.id}) }}">show</a> #}
 							<a href="{{ path('app_comment_edit', {'id': comment.id}) }}">edit</a>
@@ -43,10 +40,9 @@
 					<tr>
 						<td colspan="8">no records found</td>
 					</tr>
+					<a href="{{ path('app_comment_new',{id: comment.book.id}) }}">Create new</a>
 				{% endfor %}
 			</tbody>
 		</table>
-
-		<a href="{{ path('app_comment_new') }}">Create new</a>
 	</div>
 {% endblock %}

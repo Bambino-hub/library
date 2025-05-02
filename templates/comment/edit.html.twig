@@ -5,12 +5,11 @@
 
 {% block body %}
 	<div class="container">
-		<h1>Edit Comment</h1>
+		<h1 class="name">Edit Comment</h1>
+		{{ include('comment/_form.html.twig') }}
 
-		{{ include('comment/_form.html.twig', {'button_label': 'Update'}) }}
+		<a class="btn btn-warning" href="{{ path('app_comment_index') }}">Retour au commentaires</a>
 
-		<a href="{{ path('app_comment_index') }}">back to list</a>
-
-		{{ include('comment/_delete_form.html.twig') }}
+		{# {{ include('comment/_delete_form.html.twig') }} #}
 	</div>
 {% endblock %}

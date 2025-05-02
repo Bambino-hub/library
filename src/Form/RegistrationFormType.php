@@ -21,13 +21,13 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('lastname', TextType::class,[
+            ->add('lastname', TextType::class, [
                 'label' => 'Lastname',
             ])
-            ->add('firstname' , TextType::class,[
+            ->add('firstname', TextType::class, [
                 'label' => 'Firstname',
             ])
-           ->add('email', TextType::class,[
+            ->add('email', TextType::class, [
                 'label' => 'Email',
             ])
             ->add('plainPassword', PasswordType::class, [
@@ -56,7 +56,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add("save", SubmitType::class,[
+            ->add("save", SubmitType::class, [
                 'label' => 'Register',
             ])
             ->addEventListener(FormEvents::POST_SUBMIT, [$this, 'attachTimesTamp'])
@@ -78,13 +78,12 @@ class RegistrationFormType extends AbstractType
     public function attachTimesTamp(PostSubmitEvent $event): void
     {
         $data = $event->getData();
-        if (!($data instanceof User) ){
+        if (!($data instanceof User)) {
             return;
         }
 
-        if(!($data->getId())){
+        if (!($data->getId())) {
             $data->setCreatedAt(new \DateTimeImmutable());
         }
     }
-    
 }

@@ -25,7 +25,7 @@ final class CreateBookController extends AbstractController
     public function new(): Response
     {
         $book = new Book();
-        $form = $this->createForm(BookType::class, $book);
+        $form = $this->createForm(BookType::class);
         $form->handleRequest($this->requestStack->getCurrentRequest());
 
 

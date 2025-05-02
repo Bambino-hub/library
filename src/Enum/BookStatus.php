@@ -9,13 +9,13 @@ enum BookStatus: string
     case RESERVED = 'reserved';
     case LOST = 'lost';
 
-    public function getLabel(): string
-    {
-        return match ($this) {
-            self::AVAILABLE => 'Disponible',
-            self::BORROWED => 'Emprunté',
-            self::RESERVED => 'Réservé',
-            self::LOST => 'Perdu',
-        };
-    }
+    // public function getLabel(): string
+    // {
+    //     return match ($this) {
+    //         self::AVAILABLE => 'Disponible',
+    //         self::BORROWED => 'Emprunté',
+    //         self::RESERVED => 'Réservé',
+    //         self::LOST => 'Perdu',
+    //     };
+    // }
 }
